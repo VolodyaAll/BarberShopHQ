@@ -1,1 +1,4 @@
-"Display list of barbers"
+<h2>Display list of barbers</h2>
+<% @barbers.each do |barber|%>
+	<p><%= barber[:name] %></p>
+<% end %>
