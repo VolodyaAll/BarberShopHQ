@@ -67,6 +67,10 @@ post '/contact' do
 	end
 end
 
+get '/barber/:id' do
+	erb :barber
+end
+
 	
 
 
