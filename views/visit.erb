@@ -4,17 +4,17 @@
 <form action="/visit" method="POST" role="form">
   <div class="form-group">
     <label>Ваше имя</label>
-    <input name="username" type="text" class="form-control" placeholder="Введите ваше имя" value="<%= @username %>">
+    <input name="client[name]" type="text" class="form-control" placeholder="Введите ваше имя" value="">
   </div>
 
   <div class="form-group">
     <label>Ваш телефон</label>
-    <input name="phone" type="text" class="form-control" placeholder="Введите ваш телефонный номер" value="<%= @phone %>">
+    <input name="client[phone]" type="text" class="form-control" placeholder="Введите ваш телефонный номер" value="">
   </div>
 
   <div class="form-group">
     <label>Дата и время посещения</label>
-    <input id="datetimepicker" name="date_time" type="text" class="form-control" placeholder="Введите дату и время вашего посещения" value="<%= @date_time %>">
+    <input id="datetimepicker" name="client[datestamp]" type="text" class="form-control" placeholder="Введите дату и время вашего посещения" value="">
   </div>
 
   <div class="form-group">
@@ -28,7 +28,7 @@
 
   <div class="form-group">
     <label>В какой цвет хотите окраситься:</label>
-      <select id="color" name="color">
+      <select id="color" name="client[color]">
         <option value="#7bd148">Green</option>
         <option value="#5484ed">Bold blue</option>
         <option value="#a4bdfc">Blue</option>
