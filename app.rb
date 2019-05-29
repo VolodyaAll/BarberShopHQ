@@ -29,6 +29,7 @@ end
 
 get '/visit' do
 	@c = Client.new	
+
 	erb :visit
 end
 
@@ -38,6 +39,7 @@ end
 
 post '/visit' do
 	@c = Client.new params[:client]
+
 	if @c.save
 		erb "Спасибо, Вы записались."	
 	else
