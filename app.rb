@@ -40,7 +40,8 @@ post '/visit' do
 	if c.save
 		erb "Спасибо, Вы записались."	
 	else
-		erb "Введите все данные"
+		@error = c.errors.full_messages.first
+		erb :visit
 	end
 end
 
