@@ -7,10 +7,10 @@ require 'sinatra/activerecord'
 set :database, "sqlite3:barbershop.db"
 
 class Client < ActiveRecord::Base
-	validates :name, presence: true, length: { minimum: 3 }
-	validates :phone, presence: true
-	validates :datestamp, presence: true
-	validates :color, presence: true
+  validates :name, presence: true, length: { minimum: 3 }
+  validates :phone, presence: true
+  validates :datestamp, presence: true
+  validates :color, presence: true
 end
 
 class Barber < ActiveRecord::Base
@@ -20,70 +20,66 @@ class Contact < ActiveRecord::Base
 end
 
 before do
-	@barbers = Barber.order "created_at DESC"
+  @barbers = Barber.order "created_at DESC"
 end
 
-get '/' do	
-	erb :index
+get '/' do
+  erb :index
 end
 
 get '/visit' do
-	@c = Client.new	
-
-	erb :visit
+  @c = Client.new
+  erb :visit
 end
 
 get '/contact' do
-	erb :contact
+  erb :contact
 end
 
 post '/visit' do
-	@c = Client.new params[:client]
+  @c = Client.new params[:client]
 
-	if @c.save
-		erb "Спасибо, Вы записались."	
-	else
-		@error = @c.errors.full_messages.first
-		erb :visit
-	end
+  if @c.save
+    erb "Спасибо, Вы записались."
+  else
+    @error = @c.errors.full_messages.first
+    erb :visit
+  end
 end
 
 post '/contact' do
+  @email = params["email"]
+  @message = params["message"]
 
-	@email = params["email"]
-	@message = params["message"]
+  hh = {email: 'Введите Email',
+    message: 'Введите сообщение'}
 
-	hh = {:email => 'Введите Email',
-		:message => 'Введите сообщение'}
+  @error = hh.select{|key,_| params[key] == ""}.values.join(", ")
 
-	@error = hh.select{|key,_| params[key] == ""}.values.join(", ")
-	
-	if @error == '' 
-
-		Contact.create :email => @email,
-						:message => @message
-		
-		erb "We will send our answer to #{params[:email]}. See you! <a href=\"http://localhost:4567\">На главную</a>"		
-	else 
-		return erb :contact
-	end
+  if @error == ''
+    Contact.create email: @email,
+            message: @message
+    erb "We will send our answer to #{params[:email]}. See you! <a href=\"http://localhost:4567\">На главную</a>"
+  else
+    return erb :contact
+  end
 end
 
 get '/barber/:id' do
-	@barber = Barber.find params[:id]
-	erb :barber
+  @barber = Barber.find params[:id]
+  erb :barber
 end
 
 get '/bookings' do
-	@clients = Client.order "created_at DESC"
-	erb :bookings
+  @clients = Client.order "created_at DESC"
+  erb :bookings
 end
 
 get '/client/:id' do
-	@client = Client.find params[:id]
-	erb :client
+  @client = Client.find params[:id]
+  erb :client
 end
 
-	
+
 
 

@@ -7,5 +7,5 @@ gem "sinatra-activerecord"
 gem "sinatra-contrib"
 
 group :development do
-	gem "tux"
+  gem "tux"
 end
